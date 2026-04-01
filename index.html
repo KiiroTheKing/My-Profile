@@ -4,50 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taiyo | Perfil</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
     <style>
-        /* Reset e Variáveis de Alto Contraste */
+        /* Reset e Variáveis */
+        :root {
+            --bg: #050505;
+            --surface: #121212;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --accent: #ffffff;
+            --border: #333333;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
-        :root {
-            --bg: #000000;
-            --text: #ffffff;
-            --accent: #ffffff;
-            --gray: #aaaaaa;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            padding: 40px 20px;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            color-scheme: dark;
         }
 
+        /* Scrollbar Customizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* Layout Principal */
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
+            padding: 60px 24px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        main {
+            flex: 1;
         }
 
         /* Títulos */
+        h1, h2, h3 {
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
         h1 {
-            font-size: 3rem;
+            font-size: clamp(3rem, 8vw, 4.5rem);
             text-transform: uppercase;
-            letter-spacing: -1px;
-            margin-bottom: 50px;
-            border-bottom: 4px solid var(--accent);
+            letter-spacing: -2px;
+            border-bottom: 2px solid var(--accent);
             padding-bottom: 10px;
+            display: inline-block;
         }
 
         h2 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 25px;
-            color: var(--accent);
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
         }
@@ -55,68 +100,101 @@
         h2::before {
             content: "";
             display: inline-block;
-            width: 15px;
-            height: 15px;
+            width: 12px;
+            height: 12px;
             background-color: var(--accent);
             margin-right: 15px;
         }
 
-        /* Seções */
+        /* Seções e Animações */
         section {
-            margin-bottom: 60px;
-            animation: fadeIn 1s ease-in-out;
+            margin-bottom: 80px;
+            animation: fadeInUp 1s ease-out both;
         }
 
-        /* Listas e Cards */
+        /* Delay nas animações para carregar em cascata */
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Listas Simples */
         ul {
             list-style: none;
         }
 
         .list-item {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
             font-size: 1.1rem;
+            padding-left: 20px;
+            position: relative;
         }
 
+        .list-item::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .list-item strong {
+            color: var(--text-main);
+        }
+
+        /* Grid de Cards */
         .card-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
         }
 
         .card {
-            border: 2px solid var(--accent);
-            padding: 25px;
-            transition: all 0.3s ease;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .card:hover {
-            transform: translateX(10px);
-            box-shadow: -5px 5px 0px var(--accent);
+            transform: translate(-4px, -4px);
+            box-shadow: 6px 6px 0px var(--accent);
+            border-color: var(--accent);
         }
 
         .card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .card p {
-            color: var(--gray);
-            font-size: 1.05rem;
+            font-size: 1rem;
+            margin-bottom: 20px;
         }
 
-        /* Links e Botões */
+        /* Botões */
         a.btn {
             display: inline-block;
-            margin-top: 15px;
-            padding: 8px 15px;
-            border: 1px solid var(--accent);
-            color: var(--text);
+            margin-top: auto; /* Empurra o botão para o final do card */
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.85rem;
-            font-weight: bold;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
             transition: 0.3s;
+            text-align: center;
+        }
+
+        .card:hover a.btn {
+            border-color: var(--accent);
         }
 
         a.btn:hover {
@@ -126,146 +204,202 @@
 
         /* Tooltips */
         .tooltip {
-            border-bottom: 1px dashed var(--accent);
+            border-bottom: 1px dashed var(--text-muted);
             cursor: help;
             position: relative;
-            font-weight: bold;
+            color: var(--text-main);
+            transition: 0.2s;
+        }
+
+        .tooltip:hover {
             color: var(--accent);
+            border-bottom-style: solid;
         }
 
         .tooltip:hover::after {
             content: attr(data-tip);
             position: absolute;
-            bottom: 130%;
+            bottom: calc(100% + 10px);
             left: 50%;
             transform: translateX(-50%);
-            background-color: var(--accent);
+            background-color: var(--text-main);
             color: var(--bg);
-            padding: 8px 12px;
-            font-size: 0.9rem;
-            font-weight: normal;
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
             white-space: normal;
             width: max-content;
-            max-width: 250px;
+            max-width: 280px;
             text-align: center;
+            border-radius: 4px;
             z-index: 10;
-            box-shadow: 0 4px 6px rgba(255,255,255,0.1);
+            pointer-events: none;
         }
 
-        /* Animação */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Seta do Tooltip */
+        .tooltip:hover::before {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--text-main) transparent transparent transparent;
         }
 
         /* Lista Numérica (Músicas) */
         .music-list li {
             font-size: 1.2rem;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 5px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+        
         .music-list li span {
-            color: var(--gray);
-            font-size: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 400;
         }
+
         .honorable-mention {
-            margin-top: 15px;
+            margin-top: 20px;
             font-style: italic;
-            color: var(--accent);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--border);
+        }
+
+        /* Keyframes */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsividade Extra */
+        @media (max-width: 600px) {
+            .music-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Taiyo</h1>
+        <header>
+            <h1>Taiyo</h1>
+        </header>
 
-        <section>
-            <h2>Valores & Essência</h2>
-            <ul>
-                <li class="list-item">Amo a <strong>Deus</strong> acima de tudo.</li>
-                <li class="list-item">Amo a <strong>Tsuki</strong>, ela me fez encontrar o sentido de viver e me sentir bem nesse mundo.</li>
-                <li class="list-item">Valorizo profundamente o <strong>conhecimento</strong> e a <strong>pureza</strong>.</li>
-            </ul>
-        </section>
+        <main>
+            <section>
+                <h2>Valores & Essência</h2>
+                <ul>
+                    <li class="list-item">Amo a <strong>Deus</strong> acima de tudo.</li>
+                    <li class="list-item">Amo a <strong>Tsuki</strong>, ela me fez encontrar o sentido de viver e me sentir bem nesse mundo.</li>
+                    <li class="list-item">Valorizo profundamente o <strong>conhecimento</strong> e a <strong>pureza</strong>.</li>
+                </ul>
+            </section>
 
-        <section>
-            <h2>Jogos Favoritos</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <h3>1. Undertale</h3>
-                    <p>Marcou a minha vida através do conceito de determinação, sendo uma obra que andou comigo ao longo de muitos anos.</p>
+            <section>
+                <h2>Jogos Favoritos</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>1. Undertale</h3>
+                        <p>Marcou a minha vida através do conceito de determinação, possui a melhor história de um jogo que eu já vi, com personagens incríveis e uma interação com o jogador junto à quebra de quarta parede que faz tudo se tornar perfeito, sendo uma obra que andou comigo ao longo de muitos anos.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>2. Hollow Knight</h3>
+                        <p>Objetivamente, o melhor jogo em questão de realmente ser um jogo (nos outros também carrego muito valor sentimental). Tenho um canal focado em Hollow Knight onde faço desafios muito difíceis e o organizo muito bem em playlists.</p>
+                        <a href="https://www.youtube.com/@paleHK" target="_blank" class="btn">Acessar Canal</a>
+                    </div>
+
+                      <div class="card">
+                        <h3>3. DOORS (Roblox)</h3>
+                        <p>Um jogo extremamente bem desenvolvido. Gosto muito dos desenvolvedores porque são dedicados e gentis, eles realmente se esforçam nos updates e o jogo tem um potencial enorme para melhorar cada vez mais. Já fiz speedrun das <span class="tooltip" data-tip="Uma das partes do jogo que vai da porta -50 até a porta 0.">Backdoors</span>.</p>
+                        <a href="https://www.speedrun.com/roblox_doors/runs/z00kjq9z" target="_blank" class="btn">Ver Speedrun</a>
+                    </div>
+
+                    <div class="card">
+                        <h3>4. The Strongest Battlegrounds (Roblox)</h3>
+                        <p>O melhor jogo de battlegrounds da plataforma, tendo as melhores mecânicas de luta, combos, combo extenders e físicas de combate. No competitivo desse jogo, eu sou o <span class="tooltip" data-tip="Um ex-top rank. Significa que saí do top porque quis, mas consigo voltar para ele normalmente.">Former</span> <span class="tooltip" data-tip="Top 27 de toda a América do Sul.">Top 27 SA</span>.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>5. Minecraft</h3>
+                        <p>Um jogo incrível e perfeito para usar toda a criatividade, com potencial para fazer quase tudo que você quiser. Sei uma parte decente de PvP 1.8.9 e tenho um pouco de conhecimento de Modern Sword PvP. Simplesmente adoro speedrunning e manhunting. Minha maior inspiração aqui é o Dream.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>6. Slap Battles (Roblox)</h3>
+                        <p>Não poderia deixar de fora por ser um jogo muito completo. Envolve <i>badge hunting</i>, algo que eu gosto muito, e os desenvolvedores são extremamente dedicados, atualizando o jogo semanalmente há anos.</p>
+                    </div>
                 </div>
+            </section>
 
-                <div class="card">
-                    <h3>2. DOORS (Roblox)</h3>
-                    <p>Um jogo extremamente bem desenvolvido. Gosto muito dos desenvolvedores porque são dedicados e gentis; eles realmente se esforçam nos updates e o jogo tem um potencial enorme para melhorar cada vez mais. Já fiz speedrun das <span class="tooltip" data-tip="Uma das partes do jogo que vai da porta -50 até a porta 0.">Backdoors</span>.</p>
-                    <a href="https://www.speedrun.com/roblox_doors/runs/z00kjq9z" target="_blank" class="btn">Ver Speedrun</a>
+            <section>
+                <h2>Narrativas Favoritas</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>1. Jujutsu Kaisen</h3>
+                        <p>O melhor anime. Possui uma história excelente. Possui conceitos quase que perfeitos e um sistema de regras e técnicas muito bem desenvolvido. Quando você acaba de assistir, percebe que tudo já tinha sido pensado desde o começo e só você que não tinha visto. </p>
+                    </div>
+
+                    <div class="card">
+                        <h3>2. Searching For A World That Doesn't Exist</h3>
+                        <p>O melhor ARG de Minecraft. Ver um personagem inteligente passando por todo aquele mundo, o tamanho do empenho e detalhamento para as estruturas feitas lá, e a forma como a história se desenrola... é tudo muito incrível.</p>
+                    </div>
                 </div>
+            </section>
 
-                <div class="card">
-                    <h3>3. Hollow Knight</h3>
-                    <p>Objetivamente, o melhor jogo em questão de realmente ser um jogo (nos outros também carrego muito valor sentimental). Tenho um canal focado em Hollow Knight onde faço desafios muito difíceis e o organizo muito bem em playlists.</p>
-                    <a href="https://www.youtube.com/@paleHK" target="_blank" class="btn">Acessar Canal</a>
-                </div>
+            <section>
+                <h2>Músicas Favoritas</h2>
+                <ul class="music-list">
+                    <li>1. Sol <span>Rafão Music</span></li>
+                    <li>2. Amor <span>VMZ</span></li>
+                    <li>3. Meu Regozijo <span>Rafão Music</span></li>
+                </ul>
+                <p class="honorable-mention">Menção Honrosa: So American (Olivia Rodrigo)</p>
+            </section>
 
-                <div class="card">
-                    <h3>4. The Strongest Battlegrounds (Roblox)</h3>
-                    <p>O melhor jogo de battlegrounds da plataforma, tendo as melhores mecânicas de luta, combos, combo extenders e físicas de combate. Nesse jogo, eu sou <span class="tooltip" data-tip="Um ex-top rank. Significa que saí do top porque quis, mas consigo voltar para ele normalmente.">Former</span> <span class="tooltip" data-tip="Top 27 de toda a América do Sul.">Top 27 SA</span>.</p>
-                </div>
+            <section>
+                <h2>Curiosidades</h2>
+                <ul>
+                    <li class="list-item">Minha cor favorita é <strong>Branco</strong>.</li>
+                    <li class="list-item">Sou fluente em <strong>Inglês</strong>.</li>
+                    <li class="list-item">Já cheguei a digitar <strong>quase 150 palavras por minuto</strong> (WPM) no teclado.</li>
+                </ul>
+            </section>
+        </main>
 
-                <div class="card">
-                    <h3>5. Minecraft</h3>
-                    <p>Um jogo incrível e perfeito para usar toda a criatividade, com potencial para fazer quase tudo que você quiser. Sei uma parte decente de PvP 1.8.9 e tenho um pouco de conhecimento de Modern Sword PvP. Simplesmente adoro speedrunning e manhunting; nunca tentei fazer uma manhunt, mas sinto que tenho potencial para ganhar e me viro bem com isso. Minha maior inspiração aqui é o Dream.</p>
-                </div>
-
-                <div class="card">
-                    <h3>6. Slap Battles (Roblox)</h3>
-                    <p>Não poderia deixar de fora por ser um jogo muito completo. Envolve <i>badge hunting</i>, algo que eu gosto muito, e os desenvolvedores são extremamente dedicados, atualizando o jogo semanalmente há anos.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>Narrativas & Obras</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <h3>Jujutsu Kaisen</h3>
-                    <p>O melhor anime. Possui uma história excelente. Quando você acaba de assistir, percebe que tudo já tinha sido pensado desde o começo e só você que não tinha visto. Possui conceitos quase que perfeitos e um sistema muito bem desenvolvido.</p>
-                </div>
-
-                <div class="card">
-                    <h3>Searching For A World That Doesn't Exist</h3>
-                    <p>O melhor ARG de Minecraft. Ver um personagem inteligente passando por todo aquele mundo, o tamanho do empenho e detalhamento para as estruturas feitas lá, e a forma como a história se desenrola... é tudo muito incrível.</p>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>Músicas Favoritas</h2>
-            <ul class="music-list">
-                <li>1. Sol <span>(Rafão Music)</span></li>
-                <li>2. Amor <span>(VMZ)</span></li>
-                <li>3. Meu Regozijo <span>(Rafão Music)</span></li>
-            </ul>
-            <p class="honorable-mention">Menção Honrosa: So American (Olivia Rodrigo)</p>
-        </section>
-
-        <section>
-            <h2>Curiosidades</h2>
-            <ul>
-                <li class="list-item">Minha cor favorita é <strong>Branco</strong>.</li>
-                <li class="list-item">Sou fluente em <strong>Inglês</strong>.</li>
-                <li class="list-item">Já cheguei a digitar <strong>quase 150 palavras por minuto</strong> (WPM) no teclado.</li>
-            </ul>
-        </section>
-
-    </div>
-
-<footer style="text-align: center; margin-top: 80px; padding-top: 20px; border-top: 1px solid var(--accent); color: var(--gray); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px;">
-            &copy; 2026 [Taiyo]. Todos os direitos reservados.
+        <footer>
+            &copy; 2026 Taiyo. Todos os direitos reservados.
         </footer>
+    </div>
 
 </body>
 </html>
