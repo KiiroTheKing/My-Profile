@@ -3,21 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taiyo | Perfil</title>
+    <title>Kiiro, O Rei | Perfil Oficial</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet">
 
     <style>
-        /* Reset e Variáveis */
+        /* Variáveis do Tema da Realeza (Apenas Ouro, Âmbar e Branco) */
         :root {
-            --bg: #050505;
-            --surface: #121212;
-            --text-main: #ffffff;
-            --text-muted: #a0a0a0;
-            --accent: #ffffff;
-            --border: #333333;
+            --bg: #FCFAEF; /* Fundo creme real */
+            --surface: #FFFFFF; /* Branco puro nos pergaminhos/cards */
+            
+            /* Textos em Ouro Escuro (Sem uso de preto ou cinza) */
+            --text-main: #856600; 
+            --text-muted: #B3922E; 
+            
+            --accent: #EBB100; /* Ouro Nobre / Dourado principal */
+            --accent-light: rgba(235, 177, 0, 0.15);
+            
+            --border: #F0E6C8; 
+            --shadow: rgba(133, 102, 0, 0.08);
         }
 
         * {
@@ -36,25 +42,17 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            color-scheme: dark;
+            /* Um padrão sutil de fundo para dar textura de palácio (opcional) */
+            background-image: radial-gradient(var(--border) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
 
-        /* Scrollbar Customizada */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--border);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent);
-        }
+        /* Scrollbar Dourada */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #E0CFA6; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-        /* Layout Principal */
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -65,155 +63,205 @@
         }
 
         header {
-            margin-bottom: 60px;
+            margin-bottom: 70px;
+            text-align: center;
             animation: fadeInDown 0.8s ease-out;
         }
 
-        main {
-            flex: 1;
+        /* A Coroa do Rei */
+        .crown-icon {
+            font-size: 3.5rem;
+            color: var(--accent);
+            margin-bottom: -10px;
+            display: block;
+            animation: floatCrown 3s ease-in-out infinite;
+            text-shadow: 0 4px 15px var(--accent-light);
         }
 
-        /* Títulos */
         h1, h2, h3 {
             color: var(--text-main);
             font-weight: 800;
         }
 
         h1 {
-            font-size: clamp(3rem, 8vw, 4.5rem);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 8vw, 5rem);
             text-transform: uppercase;
-            letter-spacing: -2px;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 10px;
+            letter-spacing: 4px;
+            position: relative;
             display: inline-block;
+            color: var(--accent);
+            text-shadow: 2px 2px 0px var(--shadow);
+        }
+
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--text-main), transparent);
         }
 
         h2 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 30px;
             display: flex;
             align-items: center;
+            color: var(--text-main);
         }
 
+        /* Flor-de-lis para os títulos */
         h2::before {
-            content: "";
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background-color: var(--accent);
+            content: "⚜";
+            color: var(--accent);
+            font-size: 1.8rem;
             margin-right: 15px;
         }
 
-        /* Seções e Animações */
         section {
             margin-bottom: 80px;
             animation: fadeInUp 1s ease-out both;
         }
 
-        /* Delay nas animações para carregar em cascata */
         section:nth-child(1) { animation-delay: 0.1s; }
         section:nth-child(2) { animation-delay: 0.2s; }
         section:nth-child(3) { animation-delay: 0.3s; }
         section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.5s; }
 
-        /* Listas Simples */
-        ul {
+        /* Lista de Decretos */
+        ul.simple-list {
             list-style: none;
-        }
-
-        .list-item {
-            margin-bottom: 16px;
-            font-size: 1.1rem;
-            padding-left: 20px;
+            background: var(--surface);
+            padding: 40px;
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s ease;
             position: relative;
         }
 
+        ul.simple-list:hover {
+            box-shadow: 0 8px 30px rgba(235, 177, 0, 0.15);
+            border-color: var(--accent);
+        }
+
+        .list-item {
+            margin-bottom: 20px;
+            font-size: 1.15rem;
+            padding-left: 35px;
+            position: relative;
+        }
+
+        .list-item:last-child { margin-bottom: 0; }
+
         .list-item::before {
-            content: "▹";
+            content: "♔"; /* Pequena coroa nos tópicos */
             position: absolute;
             left: 0;
+            top: -2px;
             color: var(--accent);
-            font-weight: bold;
+            font-size: 1.4rem;
         }
 
         .list-item strong {
             color: var(--text-main);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
         }
 
-        /* Grid de Cards */
+        /* Cards em estilo de estandartes */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 24px;
         }
 
         .card {
             background-color: var(--surface);
             border: 1px solid var(--border);
-            padding: 30px;
+            border-top: 6px solid var(--accent);
+            border-radius: 4px; /* Mais reto para parecer oficial */
+            padding: 35px 30px;
             display: flex;
             flex-direction: column;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 15px var(--shadow);
+            position: relative;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid var(--border);
+            pointer-events: none;
+            opacity: 0.5;
         }
 
         .card:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 6px 6px 0px var(--accent);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px var(--accent-light);
             border-color: var(--accent);
+            /* FIX: Eleva o card para que as tooltips não fiquem escondidas por outros cards */
+            z-index: 10; 
         }
 
         .card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 12px;
+            font-size: 1.35rem;
+            margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+            color: var(--text-main);
         }
 
         .card p {
-            font-size: 1rem;
-            margin-bottom: 20px;
+            font-size: 1.05rem;
+            margin-bottom: 25px;
         }
 
-        /* Botões */
+        /* Botão Dourado Real */
         a.btn {
             display: inline-block;
-            margin-top: auto; /* Empurra o botão para o final do card */
-            padding: 10px 20px;
-            background: transparent;
-            border: 1px solid var(--border);
+            margin-top: auto;
+            padding: 12px 24px;
+            background: var(--surface);
+            border: 2px double var(--accent); /* Borda dupla elegante */
             color: var(--text-main);
             text-decoration: none;
             text-transform: uppercase;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 2px;
             transition: 0.3s;
             text-align: center;
         }
 
-        .card:hover a.btn {
-            border-color: var(--accent);
-        }
-
         a.btn:hover {
             background-color: var(--accent);
-            color: var(--bg);
+            color: var(--surface);
+            box-shadow: 0 0 15px var(--accent-light);
         }
 
         /* Tooltips */
         .tooltip {
-            border-bottom: 1px dashed var(--text-muted);
+            border-bottom: 2px dotted var(--accent);
             cursor: help;
             position: relative;
             color: var(--text-main);
+            font-weight: 600;
             transition: 0.2s;
         }
 
-        .tooltip:hover {
-            color: var(--accent);
-            border-bottom-style: solid;
+        .tooltip:hover { 
+            color: var(--accent); 
+            /* FIX: Eleva a tooltip acima de outros elementos do próprio card */
+            z-index: 20; 
         }
 
         .tooltip:hover::after {
@@ -223,87 +271,66 @@
             left: 50%;
             transform: translateX(-50%);
             background-color: var(--text-main);
-            color: var(--bg);
-            padding: 8px 14px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            color: var(--surface);
+            padding: 12px 18px;
+            font-size: 0.9rem;
+            font-weight: 400;
             white-space: normal;
             width: max-content;
             max-width: 280px;
             text-align: center;
             border-radius: 4px;
-            z-index: 10;
+            z-index: 100; /* FIX: Valor alto para não perder no empilhamento */
             pointer-events: none;
+            box-shadow: 0 8px 20px var(--shadow);
+            border: 1px solid var(--accent);
         }
 
-        /* Seta do Tooltip */
         .tooltip:hover::before {
             content: "";
             position: absolute;
             bottom: 100%;
             left: 50%;
             transform: translateX(-50%);
-            border-width: 5px;
+            border-width: 6px;
             border-style: solid;
             border-color: var(--text-main) transparent transparent transparent;
+            z-index: 100;
         }
 
-        /* Lista Numérica (Músicas) */
-        .music-list li {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border);
-            color: var(--text-main);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .music-list li span {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 400;
-        }
-
-        .honorable-mention {
-            margin-top: 20px;
-            font-style: italic;
-            color: var(--text-main);
-            font-size: 0.95rem;
-            opacity: 0.8;
-        }
-
-        /* Footer */
+        /* Rodapé do Reino */
         footer {
             margin-top: auto;
             padding-top: 40px;
             border-top: 1px solid var(--border);
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--border);
+            letter-spacing: 3px;
+            color: var(--text-muted);
+        }
+        
+        footer span {
+            color: var(--text-main);
+            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
         }
 
-        /* Keyframes */
+        /* Animações Reais */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
+            from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsividade Extra */
-        @media (max-width: 600px) {
-            .music-list li {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
+        @keyframes floatCrown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
@@ -311,13 +338,14 @@
 
     <div class="container">
         <header>
-            <h1>Taiyo</h1>
+            <span class="crown-icon">♛</span>
+            <h1>Kiiro</h1>
         </header>
 
         <main>
             <section>
-                <h2>Valores & Essência</h2>
-                <ul>
+                <h2>Os Pilares do Rei</h2>
+                <ul class="simple-list">
                     <li class="list-item">Amo a <strong>Deus</strong> acima de tudo.</li>
                     <li class="list-item">Amo a <strong>Tsuki</strong>, ela me fez encontrar o sentido de viver e me sentir bem nesse mundo.</li>
                     <li class="list-item">Valorizo profundamente o <strong>conhecimento</strong> e a <strong>pureza</strong>.</li>
@@ -325,7 +353,7 @@
             </section>
 
             <section>
-                <h2>Jogos Favoritos</h2>
+                <h2>Reinos Conquistados (Jogos)</h2>
                 <div class="card-grid">
                     <div class="card">
                         <h3>1. Undertale</h3>
@@ -345,7 +373,7 @@
                     </div>
 
                     <div class="card">
-                        <h3>4. The Strongest Battlegrounds (Roblox)</h3>
+                        <h3>4. The Strongest Battlegrounds</h3>
                         <p>O melhor jogo de battlegrounds da plataforma, tendo as melhores mecânicas de luta, combos, combo extenders e físicas de combate. No competitivo desse jogo, eu sou o <span class="tooltip" data-tip="Um ex-top rank. Significa que saí do top porque quis, mas consigo voltar para ele normalmente.">Former</span> <span class="tooltip" data-tip="Top 27 de toda a América do Sul.">Top 27 SA</span>.</p>
                     </div>
 
@@ -355,7 +383,7 @@
                     </div>
 
                     <div class="card">
-                        <h3>6. Slap Battles (Roblox)</h3>
+                        <h3>6. Slap Battles</h3>
                         <p>Não poderia deixar de fora por ser um jogo muito completo. Envolve <i>badge hunting</i>, algo que eu gosto muito, e os desenvolvedores são extremamente dedicados, atualizando o jogo semanalmente há anos.</p>
                     </div>
                 </div>
@@ -366,7 +394,7 @@
                 <div class="card-grid">
                     <div class="card">
                         <h3>1. Jujutsu Kaisen</h3>
-                        <p>O melhor anime. Possui uma história excelente. Possui conceitos quase que perfeitos e um sistema de regras e técnicas muito bem desenvolvido. Quando você acaba de assistir, percebe que tudo já tinha sido pensado desde o começo e só você que não tinha visto. </p>
+                        <p>O melhor anime. Possui uma história excelente. Possui conceitos quase que perfeitos e um sistema de regras e técnicas muito bem desenvolvido. Quando você acaba de assistir, percebe que tudo já tinha sido pensado desde o começo e só você que não tinha visto.</p>
                     </div>
 
                     <div class="card">
@@ -377,27 +405,36 @@
             </section>
 
             <section>
-                <h2>Músicas Favoritas</h2>
-                <ul class="music-list">
-                    <li>1. Sol <span>Rafão Music</span></li>
-                    <li>2. Amor <span>VMZ</span></li>
-                    <li>3. Meu Regozijo <span>Rafão Music</span></li>
-                </ul>
-                <p class="honorable-mention">Menção Honrosa: So American (Olivia Rodrigo)</p>
+                <h2> Cantores Favoritos</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>1. Novatroop</h3>
+                        <p>Possui músicas com um estilo completamente diferente, inovando em tudo e carregando o maior peso de sentido na letra, chegando a ser quase um poema.</p>
+                    </div>
+                    <div class="card">
+                        <h3>2. Rafão Music</h3>
+                        <p>Ex-membro da Novatroop, possui quase as mesmas características da Novatroop porém com um estilo um pouco diferente.</p>
+                    </div>
+                    <div class="card">
+                        <h3>3. Olivia Rodrigo</h3>
+                        <p>Uma ótima cantora, conseguindo expressar seus sentimentos muito bem através das músicas e uma boa pessoa até mesmo fora da música, cantora favorita da Tsuki.</p>
+                    </div>
+                </div>
             </section>
 
             <section>
-                <h2>Curiosidades</h2>
-                <ul>
-                    <li class="list-item">Minha cor favorita é <strong>Branco</strong>.</li>
-                    <li class="list-item">Sou fluente em <strong>Inglês</strong>.</li>
-                    <li class="list-item">Já cheguei a digitar <strong>quase 150 palavras por minuto</strong> (WPM) no teclado.</li>
+                <h2>Curiosidades do Rei</h2>
+                <ul class="simple-list">
+                    <li class="list-item">A minha cor favorita é o <strong>Amarelo Claro</strong> (Clear Yellow).</li>
+                    <li class="list-item">Eu simplesmente amo <strong>músicas</strong>, sendo pra mim a melhor forma de arte e expressão.</li>
+                    <li class="list-item">Tenho uma grande facilidade com linguagens e sou completamente <strong>fluente em Inglês</strong>.</li>
+                    <li class="list-item">Tenho bastante agilidade no teclado, já cheguei a digitar <strong>quase 150 palavras por minuto</strong> (WPM).</li>
                 </ul>
             </section>
         </main>
 
         <footer>
-            &copy; 2026 Taiyo. Todos os direitos reservados.
+            &copy; 2026 <span>Kiiro</span>. Todos os direitos reservados.
         </footer>
     </div>
 
